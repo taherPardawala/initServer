@@ -15,7 +15,10 @@ if (process.argv.length == 4 && fs.existsSync(process.argv[2])) {
         "version": "1.0.0",
         "description": "",
         "main": "app.js",
-        "scripts": {},
+        "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1",
+            "server": "nodemon app.js"
+        },
         "author": "",
         "license": "ISC",
         "dependencies": {
