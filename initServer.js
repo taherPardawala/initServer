@@ -4,22 +4,18 @@ let {exec} = require('child_process');
 if (process.argv.length == 4 && fs.existsSync(process.argv[2])) {
     // Got dir bath
 
-    let serverFolderPath = process.argv[2];
+    let dirPath = process.argv[2];
     fs.writeFileSync(dirPath + '/app.js', `
         let server = require('./server/server');
         server();
     `);
     
-    // package.json file
-    fs.writeFileSync(dirPath+'/package.json', `
-    {
-        "name": ${process.argv[3]},
+    let obj = {
+        "name": process.argv[3],
         "version": "1.0.0",
         "description": "",
         "main": "app.js",
-        "scripts": {
-          "test": "echo \"Error: no test specified\" && exit 1"
-        },
+        "scripts": {},
         "author": "",
         "license": "ISC",
         "dependencies": {
@@ -30,8 +26,9 @@ if (process.argv.length == 4 && fs.existsSync(process.argv[2])) {
           "mongodb": "^2.2.34",
           "nodemon": "^1.17.1",
         }
-      }
-    `);
+    }
+    // package.json file
+    fs.writeFileSync(dirPath+'/package.json', JSON.stringify(obj,null,2));
 
 
     // mutated for server folder
