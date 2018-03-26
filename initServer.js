@@ -34,7 +34,7 @@ if (process.argv.length == 4 && fs.existsSync(process.argv[2])) {
     fs.writeFileSync(dirPath+'/package.json', JSON.stringify(obj,null,2));
     // git ignore
     fs.writeFileSync(dirPath+'/.gitignore', `
-        node_modules
+        node_modules/
         .vscode/
     `);
 
