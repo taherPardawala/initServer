@@ -1,7 +1,7 @@
 const fs = require('fs');
 let {exec} = require('child_process');
 
-if (process.argv.length == 3 && fs.existsSync(process.argv[2])) {
+if (process.argv.length == 4 && fs.existsSync(process.argv[2])) {
     // Got dir bath
 
     let serverFolderPath = process.argv[2];
@@ -13,7 +13,7 @@ if (process.argv.length == 3 && fs.existsSync(process.argv[2])) {
     // package.json file
     fs.writeFileSync(dirPath+'/package.json', `
     {
-        "name": "generated-init-name",
+        "name": ${process.argv[3]},
         "version": "1.0.0",
         "description": "",
         "main": "app.js",
@@ -125,8 +125,11 @@ if (process.argv.length == 3 && fs.existsSync(process.argv[2])) {
             },
         }
     `);
-
-
+    
+    exec('npm i', {cwd:dirPath}, ( err, stdout, stderr )=> {
+        if ( err ) console.error(err);
+        if ( stderr ) console.error(stderr);
+    })
 } else {
     console.error('Path does not exist');
 }
